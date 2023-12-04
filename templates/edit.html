@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>일정 수정</title>
+</head>
+<body>
+    <h1>일정 수정하기</h1>
+    <form action="/edit/{{ schedule.id }}" method="post">
+        <label for="name">이름:</label>
+        <input type="text" id="name" name="name" value="{{ schedule.name }}"><br><br>
+
+        <label for="schedule">일정:</label>
+        <input type="text" id="schedule" name="schedule" value="{{ schedule.schedule | join(',') }}"><br><br>
+
+        <label for="count">사용 횟수:</label>
+        <input type="text" id="count" name="count" value="{{ schedule.count }}"><br><br>
+
+        <input type="submit" value="수정">
+    </form>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MFP-3D Reservation</title>
+</head>
+<body>
+    <h1>Schedule submission</h1>
+    <!-- 제출 폼 -->
+    <form action="/submit" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br><br>
+
+        <label for="schedule">Schedule:</label>
+        <input type="text" placeholder="MON 07, TUE 13, ..." id="schedule" name="schedule"><br><br>
+
+        <label for="count">Count:</label>
+        <input type="text" id="count" name="count"><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <!-- 전체 일정 목록 -->
+    <h1>Schedule List</h1>
+    <ul>
+        {% for item in all_schedules %}
+            <li>
+                {{ item.name }} - {{ item.schedule }} (Count: {{ item.count }})
+                <a href="/edit/{{ item.id }}">Edit</a> 
+                <a href="/delete/{{ item.id }}">Delite</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <!-- '전체 일정 삭제' 버튼 -->
+    <form action="/delete_all" method="get">
+        <input type="submit" value="Delete ALL">
+    </form>
+
+    <h1>일정</h1>
+    <!-- '일정 확정' 버튼 -->
+    <form action="/finalize" method="get">
+        <input type="submit" value="Confirm Schedules"><br><br>
+    </form>
+
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 600px;
+        }
+        th, td {
+            border: 1px solid black; /* 테두리 추가 */
+            padding: 5px; /* 셀 내부 여백 조정 */
+            text-align: center;
+            width: 50px; /* 각 셀의 폭 지정 */
+        }
+        th {
+            background-color: #f2f2f2; /* 헤더 배경색 지정 */
+        }
+    </style>
+
+    <table>
+        <tr>
+            <th></th> <!-- 첫 번째 행은 빈 셀 -->
+            <th>MON</th>
+            <th>TUE</th>
+            <th>WED</th>
+            <th>THR</th>
+            <th>FRI</th>
+            <th>SAT</th>
+            <th>SUN</th>
+        </tr>
+        <tr>
+            <td>07-13</td>
+            <td>{{ calendar['MON 07'] }}</td>
+            <td>{{ calendar['TUE 07'] }}</td>
+            <td>{{ calendar['WED 07'] }}</td>
+            <td>{{ calendar['THR 07'] }}</td>
+            <td>{{ calendar['FRI 07'] }}</td>
+            <td>{{ calendar['SAT 07'] }}</td>
+            <td>{{ calendar['SUN 07'] }}</td>
+        </tr>
+        <tr>
+            <td>13-19</td>
+            <td>{{ calendar['MON 13'] }}</td>
+            <td>{{ calendar['TUE 13'] }}</td>
+            <td>{{ calendar['WED 13'] }}</td>
+            <td>{{ calendar['THR 13'] }}</td>
+            <td>{{ calendar['FRI 13'] }}</td>
+            <td>{{ calendar['SAT 13'] }}</td>
+            <td>{{ calendar['SUN 13'] }}</td>
+        </tr>
+        <tr>
+            <td>19-24</td>
+            <td>{{ calendar['MON 19'] }}</td>
+            <td>{{ calendar['TUE 19'] }}</td>
+            <td>{{ calendar['WED 19'] }}</td>
+            <td>{{ calendar['THR 19'] }}</td>
+            <td>{{ calendar['FRI 19'] }}</td>
+            <td>{{ calendar['SAT 19'] }}</td>
+            <td>{{ calendar['SUN 19'] }}</td>
+        </tr>
+    </table>
+    <br>
+    <!-- '일정 초기화' 버튼 -->
+    <form action="/reset_all" method="get">
+        <input type="submit" value="Reset Calendar">
+    </form>
+</body>
+</html>
